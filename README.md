@@ -1,3 +1,11 @@
+# This is a fork/Rewrite of Translucents Atlassian Plugin SDK container
+I mainly created this because I didn't want to have yet another SDK in my path, especially not one using Java 8.
+
+Instead of basing it on the official Java 8 container, I based it on the Rocky Linux 8 Container, that can also install Java 8.
+
+
+----
+OLD README
 # Atlassian Plugin SDK wrapped in a Docker container
 
 This is an Docker image that has the Atlassian Plugin SDK, AMPS, installed and is extending the official Java image from the Docker Hub repositories. It has been made as an experiment to make development and collaboration on extending Atlassian products easier to work with by using Docker and all its glory.

@@ -1,22 +1,26 @@
-FROM java:8-jdk
+FROM rockylinux:latest
 
 # Maintainers on this project are the following:
-MAINTAINER Martin Aksel Jensen <maj@translucent.dk>
+MAINTAINER Johannes <johannes@jmbfountain.de>
 
-# Install the Atlassian Plugins SDK using the official Aptitude debian
-# package repository
-RUN echo "deb http://sdkrepo.atlassian.com/debian/ stable contrib" >>/etc/apt/sources.list \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B07804338C015B73 \
-    && apt-get update \
-    && apt-get install --yes atlassian-plugin-sdk=6.2.2
+RUN yum update -y
+RUN yum install vim java-1.8.0-openjdk zip unzip curl wget -y
 
-# Copy Maven preference files to predefine the command line question about
-# subscribing to the mailing list to `NO`.
-COPY onbuild/.java /root/.java
+COPY rpm-repo /etc/yum.repos.d/atlassian.repo
 
-# Create directory for sources using the same practice as the ruby images
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN yum clean all -y
+RUN yum updateinfo metadata -y
+RUN yum install atlassian-plugin-sdk -y
+
+RUN wget  https://services.gradle.org/distributions/gradle-7.4-bin.zip
+RUN mkdir /opt/gradle/
+RUN unzip -d /opt/gradle gradle-7.4-bin.zip
+RUN echo "PATH=$PATH:/opt/gradle/gradle-7.4/bin" >> /etc/profile
+
+# Create directory for source software
+RUN mkdir -p /repo/
+WORKDIR /repo/
+RUN atlas-version
 
 # Set the default running command of the AMPS image to be running the
 # application in debug mode.
