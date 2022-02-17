@@ -2,6 +2,9 @@ FROM rockylinux:latest
 
 # Maintainers on this project are the following:
 LABEL org.opencontainers.image.authors="johannes@jmbfountain.de"
+LABEL version="0.1.0"
+LABEL description="This image wraps the Atlassian Plugin sdk in a docker container for easier updating and handling"
+LABEL name="Atlassian Plugin SDK"
 EXPOSE 2990
 
 RUN yum update -y
