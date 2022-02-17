@@ -8,7 +8,7 @@ LABEL name="Atlassian Plugin SDK"
 EXPOSE 2990
 
 RUN yum update -y
-RUN yum install vim java-1.8.0-openjdk-headless zip unzip curl wget -y
+RUN yum install vim java-1.8.0-openjdk-headless java-1.8.0-openjdk-devel zip unzip curl wget -y
 
 COPY rpm-repo /etc/yum.repos.d/atlassian.repo
 
