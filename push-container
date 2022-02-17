@@ -1,0 +1,7 @@
+#!/bin/bash
+HASH=$(git rev-parse --short HEAD)
+docker build -t jmbfountain/atlassian-plugin-sdk:latest .
+docker build -t jmbfountain/atlassian-plugin-sdk:$HASH .
+
+docker push jmbfountain/atlassian-plugin-sdk:latest 
+docker push jmbfountain/atlassian-plugin-sdk:$HASH 
